@@ -1,0 +1,25 @@
+version: '3'
+ 
+services:
+  db2324:
+    image: mysql:5.7.22
+    container_name: mysqlDawes2324
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata2324:/var/lib/mysql
+  phpmyadmin2324:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadminDawes2324
+    links:
+      - db2324
+    environment:
+      PMA_HOST: mysqlDawes2324
+      PMA_PORT: 3306
+    restart: always
+    ports:
+      - 8090:80
+volumes:
+  dbdata2324:
